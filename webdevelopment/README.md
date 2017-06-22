@@ -1,0 +1,15 @@
+# gulpfile.js
+Holds the essentials of a gulpfile
+
+## requirements
+gulp
+gulp-sass
+
+Install them easily via npm:
+'''
+npm init
+npm install gulp --save-dev
+npm install gulp-sass --save-dev
+npm install browser-sync --save-dev
+npm install typescript gulp-typescript --save-dev
+'''
