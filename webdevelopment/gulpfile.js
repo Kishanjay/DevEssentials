@@ -27,7 +27,7 @@ var browserSync = require("browser-sync").create();
 */
 gulp.task("build-css", function() {
     return gulp.src("./source/scss/**/*.scss")
-        .pipe(sass())
+        .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest("./public/css"));
 });
 
