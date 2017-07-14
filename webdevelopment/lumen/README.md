@@ -134,3 +134,58 @@ $app->get('pickuplines', function(){
     return \App\Pickupline::all();
 });
 ```
+
+# Example controller
+
+create file app/Http/Controllers/PickuplineController.php
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Pickupline;
+
+class PickuplineController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Store a new pickupline.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        $author = $request->input('author');
+        $pickupline = $request->input('pickupline');
+        $error = null;
+
+        try {
+            $entry = new Pickupline();
+            $entry->author = $author;
+            $entry->ip_addr = $request->ip();
+            $entry->pickupline = $pickupline;
+
+            $success = $entry->save();
+        }
+        catch (\Exception $e) {
+            $success = false;
+            $error = $e;
+        }
+
+        return response()->json(['success' => $success, 'error' => $error]);
+    }
+}
+
+```
