@@ -13,3 +13,11 @@ npm install gulp-sass --save-dev
 npm install browser-sync --save-dev
 npm install typescript gulp-typescript --save-dev
 ```
+
+# Server
+
+Serve any folder quickly
+
+```sh
+python -m SimpleHTTPServer 8000
+```
