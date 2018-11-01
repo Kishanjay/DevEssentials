@@ -4,6 +4,8 @@ var request = require('request');
 
 
 const GULPFILE_URL = "https://raw.githubusercontent.com/Kishanjay/DevEssentials/master/webdevelopment/BOILERPLATE/gulpfile.js";
+const PACKAGEJSON_URL = "https://raw.githubusercontent.com/Kishanjay/DevEssentials/master/webdevelopment/BOILERPLATE/package.json";
+const STYLE_URL = "https://raw.githubusercontent.com/Kishanjay/DevEssentials/master/webdevelopment/BOILERPLATE/src/scss/style.scss";
 
 function start() {
     if (process.argv.length < 3) {
@@ -31,8 +33,12 @@ function start() {
 
     var gulpfile = fs.createWriteStream(path.join(projectPath, "gulpfile.js"));
     download(GULPFILE_URL, gulpfile);
-    
-    
+
+    var packagejson = fs.createWriteStream(path.join(projectPath, "package.json"));
+    download(PACKAGEJSON_URL, packagejson);
+
+    var stylescss = fs.createWriteStream(path.join(scssPath, "style.scss"));
+    download(STYLE_URL, stylescss);
 };
 
 start();

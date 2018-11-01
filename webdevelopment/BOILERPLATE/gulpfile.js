@@ -50,7 +50,7 @@ gulp.task("build-html", function(){
 *    -> Recompiles ts into the corresponding folder
 */
 gulp.task("build-ts", function(){
-    gulp.src("./src/ts/**/*.ts")
+    return gulp.src("./src/ts/**/*.ts")
         .pipe(ts({
             noImplicitAny: true,
             out: "script.js"
@@ -70,7 +70,7 @@ gulp.task('minify-js', function () {
       .pipe(gulp.dest('./dist/js'));
 });
 gulp.task('minify-images', function () {
-    gulp.src('./src/media/*')
+    return gulp.src('./src/media/*')
         .pipe(imagemin())
         .pipe(gulp.dest('./dist/media/'))
 });
@@ -87,11 +87,15 @@ gulp.task("browserSync", function() {
 });
 
 
+gulp.task("build", ["build-html", "build-css", "build-ts", "minify-images"])
+gulp.task("publish", ["build", "minify-css", "minify-js"]);
+
+
 /* Start watching all
 *   - First compiles everything
 *   - Then sets up watchers for css
 */
-gulp.task("watch", ["browserSync", "build-html", "build-css", "build-ts", "minify-images"], function(){
+gulp.task("watch", ["browserSync", "build"], function(){
     gulp.watch("./src/**/*.html", ["build-html"]);
     gulp.watch("./dist/**/*.html", browserSync.reload);
     gulp.watch("./src/scss/**/*.scss", ["build-css"]);
@@ -100,6 +104,8 @@ gulp.task("watch", ["browserSync", "build-html", "build-css", "build-ts", "minif
     gulp.watch("./dist/js/**/*.js", browserSync.reload);
     gulp.watch("./src/media/**/*.*", ["minify-images"]);
     gulp.watch("./dist/media/**/*.*", browserSync.reload);
+
+    gulp.watch("gulpfile.js").on("change", () => process.exit(0));
 });
 
-gulp.task("publish", ["build-html", "build-css", "build-ts", "minify-css", "minify-js", "minify-images"])
+
