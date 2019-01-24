@@ -1,6 +1,6 @@
 /* =============================================================================
     @author: Kishan Nirghin
-    @date:  22th june 2017
+    @date:  14th november 2018
     @description: gulpfile that covers the basic needs for webdevelopment
 
     @folders: The expected folder structure of a project looks like this
@@ -70,7 +70,7 @@ gulp.task('minify-js', function () {
       .pipe(gulp.dest('./dist/js'));
 });
 gulp.task('minify-images', function () {
-    return gulp.src('./src/media/*')
+    return gulp.src('./dist/media/*')
         .pipe(imagemin())
         .pipe(gulp.dest('./dist/media/'))
 });
@@ -87,15 +87,17 @@ gulp.task("browserSync", function() {
 });
 
 
-gulp.task("build", ["build-html", "build-css", "build-ts", "minify-images"])
-gulp.task("publish", ["build", "minify-css", "minify-js"]);
+gulp.task("build", gulp.series("build-html", "build-css", "build-ts"));
+
+/* Minfies the resources */
+gulp.task("publish", gulp.series("build", "minify-css", "minify-js", "minify-images"));
 
 
 /* Start watching all
 *   - First compiles everything
 *   - Then sets up watchers for css
 */
-gulp.task("watch", ["browserSync", "build"], function(){
+gulp.task("watch", gulp.series("browserSync", "build", function(){
     gulp.watch("./src/**/*.html", ["build-html"]);
     gulp.watch("./dist/**/*.html", browserSync.reload);
     gulp.watch("./src/scss/**/*.scss", ["build-css"]);
@@ -106,6 +108,4 @@ gulp.task("watch", ["browserSync", "build"], function(){
     gulp.watch("./dist/media/**/*.*", browserSync.reload);
 
     gulp.watch("gulpfile.js").on("change", () => process.exit(0));
-});
-
-
+}));
