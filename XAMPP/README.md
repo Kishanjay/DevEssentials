@@ -1,5 +1,12 @@
 # VirtualHosting
 
+## Enable Virtual Hosting
+Uncomment the following line in `/Applications/XAMPP/xamppfiles/etc/httpd.conf`
+```
+#Include /Applications/XAMPP/etc/extra/httpd-vhosts.conf
+```
+
+## Add Virtual Host
 Add a new virtual host to host with different Root Directory
 ```sh
 /Applications/XAMPP/etc/extra$ nano httpd-vhosts.conf

@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-mysql-docker",
+  "version": "1.0.0",
+  "description": "NodeJS MySQL docker demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon index.js",
+    "dev": "nodemon --legacy-watch index.js"
+  },
+  "author": "Kishan Nirghin",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

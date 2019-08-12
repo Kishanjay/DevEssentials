@@ -29,3 +29,24 @@ Auth::routes();
 // $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 ```
+
+
+## Creates the model and migration
+`php artisan make:model Contact --migration`
+
+## Creates the controller
+`php artisan make:controller ContactController --resource`
+php artisan make:controller PhotoController --resource --model=Photo
+php artisan make:controller API/PhotoController --api --resource --model=Photo
+
+## Create the Routes
+`Route::resource('contacts', 'ContactController');`
+```
+GET/contacts, mapped to the index() method,
+GET /contacts/create, mapped to the create() method,
+POST /contacts, mapped to the store() method,
+GET /contacts/{contact}, mapped to the show() method,
+GET /contacts/{contact}/edit, mapped to the edit() method,
+PUT/PATCH /contacts/{contact}, mapped to the update() method,
+DELETE /contacts/{contact}, mapped to the destroy() method.
+```
