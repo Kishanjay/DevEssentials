@@ -32,8 +32,9 @@ which apachectl
 sudo apachectl -help
 ```
 
-Enable virtual hosting by uncommenting the following line in the `httpd.conf` file.
+Enable virtual hosting by uncommenting the following line in the `httpd.conf` file. _Different installations have different folders_
 `/usr/local/extra/httpd/httpd.conf`
+`/usr/local/etc/httpd/httpd.conf`
 `/Applications/XAMPP/xamppfiles/etc/httpd.conf`
 ```
 #Include /Applications/XAMPP/etc/extra/httpd-vhosts.conf
